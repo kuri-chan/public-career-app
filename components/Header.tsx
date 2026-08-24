@@ -9,7 +9,7 @@ export function Header() {
             適
           </span>
           <span className="text-sm font-semibold tracking-wide text-slate-800 sm:text-base">
-            公務員キャリア診断
+            公務員からのキャリアシフト診断
           </span>
         </Link>
         <p className="hidden text-xs text-slate-500 sm:block">約2分・全5問</p>

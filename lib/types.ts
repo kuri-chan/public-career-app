@@ -5,13 +5,13 @@ export type DiagnosisType = "bizops" | "ainocode" | "reskill";
 export type QuestionOption = {
   id: string;
   label: string;
-  type: DiagnosisType;
+  scores: Partial<Record<DiagnosisType, number>>;
 };
 
 export type Question = {
   id: string;
   title: string;
-  description: string;
+  description?: string;
   options: QuestionOption[];
 };
 

@@ -23,12 +23,13 @@ export default function HomePage() {
           行政職員・公務員向け
         </p>
         <h1 className="mt-3 text-2xl font-bold leading-tight text-slate-900 sm:text-4xl">
-          キャリア・IT移行
-          <br className="sm:hidden" />
-          適性診断
+          公務員からのキャリアシフト診断
         </h1>
         <p className="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base">
-          民間転職やITスキル移行で、自分はどの道が合いそうか。5つの質問から適性タイプを確認できます。回答はブラウザ内で処理します。
+          行政経験を「民間の即戦力スキル」に換算する5つの質問
+        </p>
+        <p className="mt-2 text-xs leading-relaxed text-slate-400">
+          回答はブラウザ内で処理され、サーバーへ送信しません。
         </p>
         <Link
           href="/diagnosis"

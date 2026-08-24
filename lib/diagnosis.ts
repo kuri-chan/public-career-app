@@ -1,15 +1,17 @@
+import { emptyScores, type ScoreMap } from "./scores";
 import { typePriority } from "./results";
 import type { DiagnosisType, QuestionOption } from "./types";
 
-export type ScoreMap = Record<DiagnosisType, number>;
-
-export function emptyScores(): ScoreMap {
-  return { bizops: 0, ainocode: 0, reskill: 0 };
-}
+export type { ScoreMap } from "./scores";
+export { emptyScores } from "./scores";
 
 export function tallyScores(answers: QuestionOption[]): ScoreMap {
   return answers.reduce((scores, answer) => {
-    scores[answer.type] += 1;
+    (Object.entries(answer.scores) as [DiagnosisType, number][]).forEach(
+      ([type, value]) => {
+        scores[type] += value;
+      },
+    );
     return scores;
   }, emptyScores());
 }

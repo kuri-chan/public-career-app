@@ -8,5 +8,8 @@ body {
 }
 
 body {
-  @apply bg-slate-50 text-slate-800 antialiased;
+  background-color: #f8fafc;
+  color: #1e293b;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

@@ -48,9 +48,11 @@ export function DiagnosisQuiz() {
         <h1 className="mt-2 text-lg font-bold leading-relaxed text-slate-900 sm:text-2xl">
           {question.title}
         </h1>
-        <p className="mt-2 text-sm leading-relaxed text-slate-500">
-          {question.description}
-        </p>
+        {question.description ? (
+          <p className="mt-2 text-sm leading-relaxed text-slate-500">
+            {question.description}
+          </p>
+        ) : null}
       </div>
 
       <div className="mt-6 space-y-3" role="listbox" aria-label="回答の選択肢">

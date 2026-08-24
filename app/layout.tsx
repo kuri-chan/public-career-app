@@ -12,9 +12,9 @@ const notoSansJp = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "公務員のためのキャリア・IT移行適性診断",
+  title: "公務員からのキャリアシフト診断",
   description:
-    "行政職員・公務員向け。5つの質問でBizOps/PM、AI活用/ノーコード、リスキリング型の適性を診断します。",
+    "行政経験を「民間の即戦力スキル」に換算する5つの質問。BizOps/PM、AI活用/ノーコード、リスキリング型の適性を診断します。",
 };
 
 export const viewport: Viewport = {

@@ -7,7 +7,7 @@ type ShareOnXButtonProps = {
 };
 
 function buildTweetUrl(typeName: string, siteUrl: string) {
-  const text = `公務員のスキル（起案・調整・予算管理）は民間でどう評価される？『キャリア・IT移行適性診断』で診断したら「${typeName}」でした！ #公務員転職 #公務員キャリア ${siteUrl}`;
+  const text = `公務員のスキル（起案・調整・予算管理）は民間でどう評価される？『公務員からのキャリアシフト診断』で診断したら「${typeName}」でした！ #公務員転職 #公務員キャリア ${siteUrl}`;
   return `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
 }
 
