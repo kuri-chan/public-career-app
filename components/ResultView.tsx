@@ -120,7 +120,8 @@ export function ResultView({ result }: ResultViewProps) {
           {result.publicExperience.points.map((point, index) => (
             <li key={index} className="rounded-xl bg-slate-50 p-4">
               <p className="font-semibold text-slate-900">{point.title}</p>
-              <p className="mt-1 text-sm leading-relaxed text-slate-600">{point.description}</p>
+              {/* point.description を point.body に修正 */}
+              <p className="mt-1 text-sm leading-relaxed text-slate-600">{point.body}</p>
             </li>
           ))}
         </ul>
