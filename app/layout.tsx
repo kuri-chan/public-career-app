@@ -5,11 +5,38 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
+const siteName = "公務員キャリアシフト診断";
+const description = "あなたの公務員としての経験や強みを活かせる民間IT・Web系のキャリア適性を診断します。";
+const siteUrl = "https://public-career-app.vercel.app";
+
 export const metadata: Metadata = {
-  title: "公務員キャリアシフト診断",
-  description: "あなたの公務員としての経験や強みを活かせる民間IT・Web系のキャリア適性を診断します。",
+  metadataBase: new URL(siteUrl),
+  title: siteName,
+  description: description,
   verification: {
     google: "--Sdex3gLGuoSfy2uybRT26sBtvUOvtP__C9qjlISqU",
+  },
+  openGraph: {
+    title: siteName,
+    description: description,
+    url: siteUrl,
+    siteName: siteName,
+    images: [
+      {
+        url: "/ogp.png",
+        width: 1200,
+        height: 630,
+        alt: siteName,
+      },
+    ],
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteName,
+    description: description,
+    images: ["/ogp.png"],
   },
 };
 
