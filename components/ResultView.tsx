@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import type { TypeResult } from "@/lib/types";
 import { ActionCards } from "./ActionCards";
@@ -54,15 +56,6 @@ export function ResultView({ result }: ResultViewProps) {
     }
   };
 
-  // 診断結果タイプに対応するおすすめ情報の取得（判定不一致時のフォールバック付き）
-  const recKey =
-    result?.name && RECOMMENDATIONS[result.name as keyof typeof RECOMMENDATIONS]
-      ? (result.name as keyof typeof RECOMMENDATIONS)
-      : "BizOps/PMタイプ";
-
-  const recommendation = RECOMMENDATIONS[recKey];
-  const linkData = AFFILIATE_LINKS[recommendation.linkKey];
-
   // 診断データが存在しない場合のガード表示
   if (!result) {
     return (
@@ -74,6 +67,15 @@ export function ResultView({ result }: ResultViewProps) {
       </div>
     );
   }
+
+  // 診断結果タイプに対応するおすすめ情報の取得（判定不一致時のフォールバック付き）
+  const recKey =
+    result.name && RECOMMENDATIONS[result.name as keyof typeof RECOMMENDATIONS]
+      ? (result.name as keyof typeof RECOMMENDATIONS)
+      : "BizOps/PMタイプ";
+
+  const recommendation = RECOMMENDATIONS[recKey];
+  const linkData = AFFILIATE_LINKS[recommendation.linkKey];
 
   return (
     <div className="space-y-6">
@@ -112,23 +114,24 @@ export function ResultView({ result }: ResultViewProps) {
       </section>
 
       {/* 3. 公務員での経験は、民間で行か評価されます */}
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-card sm:p-8">
-        <h2 className="text-lg font-bold text-slate-900 sm:text-xl">
-          公務員での経験は、民間で行か評価されます
-        </h2>
-        <ul className="mt-4 space-y-3">
-          {result.publicExperience.points.map((point, index) => (
-            <li key={index} className="rounded-xl bg-slate-50 p-4">
-              <p className="font-semibold text-slate-900">{point.title}</p>
-              {/* point.description を point.body に修正 */}
-              <p className="mt-1 text-sm leading-relaxed text-slate-600">{point.body}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
+      {result.publicExperience && (
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-card sm:p-8">
+          <h2 className="text-lg font-bold text-slate-900 sm:text-xl">
+            公務員での経験は、民間で行か評価されます
+          </h2>
+          <ul className="mt-4 space-y-3">
+            {result.publicExperience.points.map((point, index) => (
+              <li key={index} className="rounded-xl bg-slate-50 p-4">
+                <p className="font-semibold text-slate-900">{point.title}</p>
+                <p className="mt-1 text-sm leading-relaxed text-slate-600">{point.body}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {/* 4. アクションカード（固定リンク） */}
-      <ActionCards cards={result.actions} />
+      {result.actions && <ActionCards cards={result.actions} />}
 
       {/* 5. SNSシェアボタン */}
       <ShareOnXButton typeName={result.name} />
