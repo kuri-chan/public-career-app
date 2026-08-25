@@ -17,8 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <body className={inter.className}>
-        {children}
+      <body className={`${inter.className} min-h-screen bg-slate-50 text-slate-900 antialiased`}>
+        <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
+          {children}
+        </div>
       </body>
       {/* GA4 測定タグ */}
       <GoogleAnalytics gaId="G-Z2EDPM4P7Y" />
