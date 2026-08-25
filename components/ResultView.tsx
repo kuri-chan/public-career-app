@@ -49,10 +49,14 @@ export function ResultView({ result }: ResultViewProps) {
   };
 
   // 診断結果タイプに対応するおすすめ情報の取得
+  const defaultRecommendation = RECOMMENDATIONS["BizOps/PMタイプ"];
   const recommendation =
-    RECOMMENDATIONS[result.name as keyof typeof RECOMMENDATIONS] ||
-    RECOMMENDATIONS["BizOps/PMタイプ"];
-  const linkData = AFFILIATE_LINKS[recommendation.linkKey];
+    (result?.name && RECOMMENDATIONS[result.name as keyof typeof RECOMMENDATIONS]) ||
+    defaultRecommendation;
+
+  const linkData = recommendation
+    ? AFFILIATE_LINKS[recommendation.linkKey]
+    : AFFILIATE_LINKS.agentNavi;
 
 
   return (
