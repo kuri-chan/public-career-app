@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import type { TypeResult } from "@/lib/types";
-import { ActionCards } from "./ActionCards";
 import { ShareOnXButton } from "./ShareOnXButton";
 
 // アフィリエイトリンク定数
@@ -68,7 +67,7 @@ export function ResultView({ result }: ResultViewProps) {
     );
   }
 
-  // 診断結果タイプに対応するおすすめ情報の取得（判定不一致時のフォールバック付き）
+  // 診断結果タイプに対応するおすすめ情報の取得
   const recKey =
     result.name && RECOMMENDATIONS[result.name as keyof typeof RECOMMENDATIONS]
       ? (result.name as keyof typeof RECOMMENDATIONS)
@@ -87,20 +86,20 @@ export function ResultView({ result }: ResultViewProps) {
         <p className="mt-4 rounded-xl bg-slate-50 p-4 text-sm leading-relaxed text-slate-700">{result.summary}</p>
       </section>
 
-      {/* 2. あなたへのおすすめ（診断タイプ別に自動切り替え） */}
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-card sm:p-8">
-        <span className="inline-block rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-700">
-          あなたへのおすすめ
+      {/* 2. あなたへのおすすめ（最優先アフィリエイトCV枠） */}
+      <section className="rounded-2xl border-2 border-brand-500 bg-white p-5 shadow-lg sm:p-8">
+        <span className="inline-block rounded-full bg-brand-100 px-3 py-1 text-xs font-bold text-brand-800">
+          あなたに最もおすすめのサービス
         </span>
-        <h3 className="mt-2 text-lg font-bold text-slate-900">{recommendation.title}</h3>
-        <p className="mt-1 text-sm text-slate-600">{recommendation.description}</p>
+        <h3 className="mt-3 text-xl font-bold text-slate-900">{recommendation.title}</h3>
+        <p className="mt-2 text-sm text-slate-600 sm:text-base">{recommendation.description}</p>
 
         <a
           href={linkData.url}
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => handleAffiliateClick(recommendation.title, result.name)}
-          className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-brand-600 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-brand-700 focus:outline-none"
+          className="mt-5 inline-flex w-full items-center justify-center rounded-xl bg-brand-600 px-6 py-4 text-base font-bold text-white shadow-md hover:bg-brand-700 focus:outline-none sm:text-lg transition-colors"
         >
           {recommendation.buttonText}
           <img
@@ -113,11 +112,11 @@ export function ResultView({ result }: ResultViewProps) {
         </a>
       </section>
 
-      {/* 3. 公務員での経験は、民間で行か評価されます */}
+      {/* 3. 公務員での経験は、民間でも高く評価されます（日本語修正済み） */}
       {result.publicExperience && (
         <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-card sm:p-8">
           <h2 className="text-lg font-bold text-slate-900 sm:text-xl">
-            公務員での経験は、民間で行か評価されます
+            公務員での経験は、民間でも高く評価されます
           </h2>
           <ul className="mt-4 space-y-3">
             {result.publicExperience.points.map((point, index) => (
@@ -130,8 +129,28 @@ export function ResultView({ result }: ResultViewProps) {
         </section>
       )}
 
-      {/* 4. アクションカード（固定リンク） */}
-      {result.actions && <ActionCards cards={result.actions} />}
+      {/* 4. ネクストステップ（具体的な行動アドバイス・テキスト中心に整理） */}
+      {result.actions && result.actions.length > 0 && (
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-card sm:p-8">
+          <h2 className="text-lg font-bold text-slate-900 sm:text-xl">
+            今後のおすすめアクションステップ
+          </h2>
+          <p className="mt-1 text-xs text-slate-500">キャリアシフトをスムーズに進めるための具体的な手順です。</p>
+          <div className="mt-4 space-y-4">
+            {result.actions.map((action, index) => (
+              <div key={index} className="flex items-start gap-4 rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-600 text-xs font-bold text-white">
+                  {index + 1}
+                </span>
+                <div>
+                  <h3 className="font-bold text-slate-900">{action.title}</h3>
+                  <p className="mt-1 text-sm text-slate-600">{action.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* 5. SNSシェアボタン */}
       <ShareOnXButton typeName={result.name} />
