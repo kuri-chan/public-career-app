@@ -8,6 +8,8 @@ const inter = Inter({ subsets: ["latin"] });
 const siteName = "公務員キャリアシフト診断";
 const description = "あなたの公務員としての経験や強みを活かせる民間IT・Web系のキャリア適性を診断します。";
 const siteUrl = "https://public-career-app.vercel.app";
+// ★ 画像URLの拡張子を .png から .jpeg に修正
+const ogpImageUrl = `${siteUrl}/ogp.jpeg`; 
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -23,7 +25,7 @@ export const metadata: Metadata = {
     siteName: siteName,
     images: [
       {
-        url: "/ogp.png",
+        url: ogpImageUrl, // ★ 修正後のURLを使用
         width: 1200,
         height: 630,
         alt: siteName,
@@ -36,7 +38,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteName,
     description: description,
-    images: ["/ogp.png"],
+    images: [ogpImageUrl], // ★ 修正後のURLを使用
   },
 };
 
