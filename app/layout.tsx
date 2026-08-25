@@ -8,6 +8,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "公務員キャリアシフト診断",
   description: "あなたの公務員としての経験や強みを活かせる民間IT・Web系のキャリア適性を診断します。",
+  verification: {
+    google: "--Sdex3gLGuoSfy2uybRT26sBtvUOvtP__C9qjlISqU",
+  },
 };
 
 export default function RootLayout({
