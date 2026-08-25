@@ -2,6 +2,8 @@ import Link from "next/link";
 import type { TypeResult } from "@/lib/types";
 import { ActionCards } from "./ActionCards";
 import { ShareOnXButton } from "./ShareOnXButton";
+
+// アフィリエイトリンク定数
 const AFFILIATE_LINKS = {
   skillHacks: {
     url: "https://px.a8.net/svt/ejp?a8mat=4BAE5B+CXKZUA+4K3S+5YJRM",
@@ -12,10 +14,12 @@ const AFFILIATE_LINKS = {
     imgSrc: "https://www10.a8.net/0.gif?a8mat=4BADDJ+BFZZEA+5BJK+5YRHE",
   },
 };
+
+// 診断タイプごとの出し分け設定
 const RECOMMENDATIONS = {
   "BizOps/PMタイプ": {
     title: "転職エージェントナビ",
-    description: "プロのアドバイザーがあなたの適性を分析し、キャリアシフトを個別にサポート",
+    description: "プロのアドバイザーがあなたの適性を分析し、キャリアシフトを個別サポート",
     linkKey: "agentNavi",
     buttonText: "無料カウンセリングを試す",
   },
@@ -32,9 +36,11 @@ const RECOMMENDATIONS = {
     buttonText: "講座の詳細・受講ページを見る",
   },
 } as const;
+
 type ResultViewProps = {
   result: TypeResult;
 };
+
 export function ResultView({ result }: ResultViewProps) {
   // クリック計測用関数
   const handleAffiliateClick = (serviceName: string, resultType: string) => {
@@ -48,65 +54,44 @@ export function ResultView({ result }: ResultViewProps) {
     }
   };
 
-  // 診断結果タイプに対応するおすすめ情報の取得
-  const defaultRecommendation = RECOMMENDATIONS["BizOps/PMタイプ"];
-  const recommendation =
-    (result?.name && RECOMMENDATIONS[result.name as keyof typeof RECOMMENDATIONS]) ||
-    defaultRecommendation;
+  // 診断結果タイプに対応するおすすめ情報の取得（判定不一致時のフォールバック付き）
+  const recKey =
+    result?.name && RECOMMENDATIONS[result.name as keyof typeof RECOMMENDATIONS]
+      ? (result.name as keyof typeof RECOMMENDATIONS)
+      : "BizOps/PMタイプ";
 
-  const linkData = recommendation
-    ? AFFILIATE_LINKS[recommendation.linkKey]
-    : AFFILIATE_LINKS.agentNavi;
+  const recommendation = RECOMMENDATIONS[recKey];
+  const linkData = AFFILIATE_LINKS[recommendation.linkKey];
 
+  // 診断データが存在しない場合のガード表示
+  if (!result) {
+    return (
+      <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-card">
+        <p className="text-slate-600">診断データが見つかりませんでした。</p>
+        <Link href="/diagnosis" className="mt-4 inline-block font-medium text-brand-600 underline">
+          もう一度診断を受ける
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
+      {/* 1. あなたの適性タイプ */}
       <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-card sm:p-8">
-        <p className="text-xs font-medium tracking-wide text-brand-700">
-          あなたの適性タイプ
-        </p>
-        <h1 className="mt-2 text-2xl font-bold text-slate-900 sm:text-3xl">
-          {result.name}
-        </h1>
-        <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
-          {result.tagline}
-        </p>
-        <p className="mt-4 rounded-xl bg-slate-50 p-4 text-sm leading-relaxed text-slate-700">
-          {result.summary}
-        </p>
+        <p className="text-xs font-medium tracking-wide text-brand-700">あなたの適性タイプ</p>
+        <h1 className="mt-2 text-2xl font-bold text-slate-900 sm:text-3xl">{result.name}</h1>
+        <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">{result.tagline}</p>
+        <p className="mt-4 rounded-xl bg-slate-50 p-4 text-sm leading-relaxed text-slate-700">{result.summary}</p>
       </section>
 
-      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-card sm:p-8">
-        <h2 className="text-lg font-bold text-slate-900">
-          {result.publicExperience.heading}
-        </h2>
-        <ul className="mt-5 space-y-4">
-          {result.publicExperience.points.map((point) => (
-            <li
-              key={point.title}
-              className="rounded-xl border border-slate-100 bg-slate-50 p-4"
-            >
-              <p className="text-sm font-semibold text-brand-800">
-                {point.title}
-              </p>
-              <p className="mt-1 text-sm leading-relaxed text-slate-700">
-                {point.body}
-              </p>
-            </li>
-          ))}
-        </ul>
-      </section>
-      {/* おすすめ案件表示カード */}
+      {/* 2. あなたへのおすすめ（診断タイプ別に自動切り替え） */}
       <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-card sm:p-8">
         <span className="inline-block rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-700">
           あなたへのおすすめ
         </span>
-        <h3 className="mt-2 text-lg font-bold text-slate-900">
-          {recommendation.title}
-        </h3>
-        <p className="mt-1 text-sm text-slate-600">
-          {recommendation.description}
-        </p>
+        <h3 className="mt-2 text-lg font-bold text-slate-900">{recommendation.title}</h3>
+        <p className="mt-1 text-sm text-slate-600">{recommendation.description}</p>
 
         <a
           href={linkData.url}
@@ -126,10 +111,28 @@ export function ResultView({ result }: ResultViewProps) {
         </a>
       </section>
 
+      {/* 3. 公務員での経験は、民間で行か評価されます */}
+      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-card sm:p-8">
+        <h2 className="text-lg font-bold text-slate-900 sm:text-xl">
+          公務員での経験は、民間で行か評価されます
+        </h2>
+        <ul className="mt-4 space-y-3">
+          {result.publicExperience.points.map((point, index) => (
+            <li key={index} className="rounded-xl bg-slate-50 p-4">
+              <p className="font-semibold text-slate-900">{point.title}</p>
+              <p className="mt-1 text-sm leading-relaxed text-slate-600">{point.description}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* 4. アクションカード（固定リンク） */}
       <ActionCards cards={result.actions} />
 
+      {/* 5. SNSシェアボタン */}
       <ShareOnXButton typeName={result.name} />
 
+      {/* 6. ナビゲーションボタン */}
       <div className="flex flex-col gap-3 sm:flex-row">
         <Link
           href="/diagnosis"
