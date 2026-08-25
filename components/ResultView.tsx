@@ -86,10 +86,33 @@ export function ResultView({ result }: ResultViewProps) {
         <p className="mt-4 rounded-xl bg-slate-50 p-4 text-sm leading-relaxed text-slate-700">{result.summary}</p>
       </section>
 
-      {/* 2. あなたへのおすすめ（最優先アフィリエイトCV枠） */}
+      {/* 2. 今後のおすすめアクションステップ */}
+      {result.actions && result.actions.length > 0 && (
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-card sm:p-8">
+          <h2 className="text-lg font-bold text-slate-900 sm:text-xl">
+            今後のおすすめアクションステップ
+          </h2>
+          <p className="mt-1 text-xs text-slate-500">キャリアシフトをスムーズに進めるための具体的な手順です。</p>
+          <div className="mt-4 space-y-4">
+            {result.actions.map((action, index) => (
+              <div key={index} className="flex items-start gap-4 rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-600 text-xs font-bold text-white">
+                  {index + 1}
+                </span>
+                <div>
+                  <h3 className="font-bold text-slate-900">{action.title}</h3>
+                  <p className="mt-1 text-sm text-slate-600">{action.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* 3. 最優先アフィリエイトCV枠（ステップ直後の高クリックエリア） */}
       <section className="rounded-2xl border-2 border-brand-500 bg-white p-5 shadow-lg sm:p-8">
         <span className="inline-block rounded-full bg-brand-100 px-3 py-1 text-xs font-bold text-brand-800">
-          あなたに最もおすすめのサービス
+          ステップ実行におすすめのサービス
         </span>
         <h3 className="mt-3 text-xl font-bold text-slate-900">{recommendation.title}</h3>
         <p className="mt-2 text-sm text-slate-600 sm:text-base">{recommendation.description}</p>
@@ -112,7 +135,7 @@ export function ResultView({ result }: ResultViewProps) {
         </a>
       </section>
 
-      {/* 3. 公務員での経験は、民間でも高く評価されます（日本語修正済み） */}
+      {/* 4. 公務員での経験は、民間でも高く評価されます（アフィリ枠の下に配置） */}
       {result.publicExperience && (
         <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-card sm:p-8">
           <h2 className="text-lg font-bold text-slate-900 sm:text-xl">
@@ -126,29 +149,6 @@ export function ResultView({ result }: ResultViewProps) {
               </li>
             ))}
           </ul>
-        </section>
-      )}
-
-      {/* 4. ネクストステップ（具体的な行動アドバイス・テキスト中心に整理） */}
-      {result.actions && result.actions.length > 0 && (
-        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-card sm:p-8">
-          <h2 className="text-lg font-bold text-slate-900 sm:text-xl">
-            今後のおすすめアクションステップ
-          </h2>
-          <p className="mt-1 text-xs text-slate-500">キャリアシフトをスムーズに進めるための具体的な手順です。</p>
-          <div className="mt-4 space-y-4">
-            {result.actions.map((action, index) => (
-              <div key={index} className="flex items-start gap-4 rounded-xl border border-slate-100 bg-slate-50 p-4">
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-600 text-xs font-bold text-white">
-                  {index + 1}
-                </span>
-                <div>
-                  <h3 className="font-bold text-slate-900">{action.title}</h3>
-                  <p className="mt-1 text-sm text-slate-600">{action.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
         </section>
       )}
 
