@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { Footer } from "@/components/Footer";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -49,10 +50,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <body className={`${inter.className} min-h-screen bg-slate-50 text-slate-900 antialiased`}>
-        <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
+      <body className={`${inter.className} flex min-h-screen flex-col bg-slate-50 text-slate-900 antialiased`}>
+        <div className="mx-auto w-full max-w-4xl flex-1 px-4 py-8 sm:px-6 lg:px-8">
           {children}
         </div>
+        <Footer />
       </body>
       {/* GA4 測定タグ */}
       <GoogleAnalytics gaId="G-Z2EDPM4P7Y" />

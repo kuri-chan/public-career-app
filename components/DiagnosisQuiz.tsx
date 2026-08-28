@@ -1,9 +1,14 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { decideType } from "@/lib/diagnosis";
 import { questions } from "@/lib/questions";
+import {
+  trackAnswerQuestion,
+  trackDiagnosisComplete,
+  trackDiagnosisStart,
+} from "@/lib/analytics";
 import type { QuestionOption } from "@/lib/types";
 import { ProgressBar } from "./ProgressBar";
 
@@ -12,6 +17,11 @@ export function DiagnosisQuiz() {
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<QuestionOption[]>([]);
   const question = questions[index];
+
+  // 診断開始を1度だけ計測
+  useEffect(() => {
+    trackDiagnosisStart();
+  }, []);
 
   const canGoBack = index > 0;
   const selectedId = useMemo(
@@ -22,6 +32,7 @@ export function DiagnosisQuiz() {
   function handleSelect(option: QuestionOption) {
     const nextAnswers = [...answers.slice(0, index), option];
     setAnswers(nextAnswers);
+    trackAnswerQuestion(question.id, option.id, index + 1);
 
     if (index < questions.length - 1) {
       window.setTimeout(() => setIndex(index + 1), 180);
@@ -29,6 +40,7 @@ export function DiagnosisQuiz() {
     }
 
     const type = decideType(nextAnswers);
+    trackDiagnosisComplete(type);
     router.push(`/result?type=${type}`);
   }
 

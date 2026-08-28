@@ -10,8 +10,12 @@ const highlights = [
     body: "BizOps/PM、AI活用/ノーコード、リスキリング型。回答の傾向から中立に判定します。",
   },
   {
-    title: "経験の翻訳つき",
-    body: "起案・調整・予算管理が民間でどう評価されるかを、タイプ別に解説します。",
+    title: "経験を民間スキルに翻訳",
+    body: "調整・起案・予算管理などの経験が、民間でどんなスキルとして活かせるかを翻訳します。",
+  },
+  {
+    title: "職種と次の一歩まで",
+    body: "相性の良い職種、現実的なキャリアルート、まず何をすればいいかまで提示します。",
   },
 ];
 
@@ -26,7 +30,7 @@ export default function HomePage() {
           公務員からのキャリアシフト診断
         </h1>
         <p className="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base">
-          行政経験を「民間の即戦力スキル」に換算する5つの質問
+          あなたの公務員経験が、民間ではどんなスキルとして活かせるのか。5つの質問で「翻訳」します。
         </p>
         <p className="mt-2 text-xs leading-relaxed text-slate-400">
           回答はブラウザ内で処理され、サーバーへ送信しません。
@@ -39,7 +43,7 @@ export default function HomePage() {
         </Link>
       </section>
 
-      <section className="grid gap-4 sm:grid-cols-3">
+      <section className="grid gap-4 sm:grid-cols-2">
         {highlights.map((item) => (
           <article
             key={item.title}
