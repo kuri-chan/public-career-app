@@ -3,6 +3,12 @@ export const SITE_URL = "https://public-career-app.vercel.app";
 // お問い合わせ用 Google フォームのURL
 export const CONTACT_FORM_URL = "https://forms.gle/dS6GUMN55fWb6AyQ6";
 
+// 職務経歴書フル版（Layer2）の申込フォーム/購入URL
+// TODO: Tally（決済連携）or note/Stripe の実URLに置き換える。
+// Tally を使う場合は、下記 buildResumeFullUrl のプレフィルパラメータ名を
+// Tally 側の hidden field 名に合わせること。
+export const RESUME_FULL_URL = "https://tally.so/r/REPLACE_WITH_YOUR_FORM_ID";
+
 // 実アフィリエイトサービス（A8.net）
 // url: 遷移先 / imgSrc: インプレッション計測用ピクセル（表示時に発火）
 export const affiliateServices = {

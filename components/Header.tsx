@@ -12,7 +12,7 @@ export function Header() {
             公務員からのキャリアシフト診断
           </span>
         </Link>
-        <p className="hidden text-xs text-slate-500 sm:block">約2分・全5問</p>
+        <p className="hidden text-xs text-slate-500 sm:block">約1分・全5問</p>
       </div>
     </header>
   );

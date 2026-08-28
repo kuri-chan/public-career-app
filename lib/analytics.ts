@@ -90,3 +90,8 @@ export function trackResumeGenerate(
 export function trackResumeCopy(resultType: DiagnosisType, block: string) {
   sendEvent("resume_copy", { result_type: resultType, block });
 }
+
+// 職務経歴書フル版（Layer2＝有料）への遷移（購入意向の最重要シグナル）
+export function trackResumeFullClick(resultType: DiagnosisType) {
+  sendEvent("resume_full_click", { result_type: resultType });
+}

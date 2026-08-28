@@ -1,7 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { trackResumeCopy, trackResumeGenerate } from "@/lib/analytics";
+import { RESUME_FULL_URL } from "@/lib/links";
+import {
+  trackResumeCopy,
+  trackResumeFullClick,
+  trackResumeGenerate,
+} from "@/lib/analytics";
 import {
   achievementOptions,
   budgetOptions,
@@ -20,6 +25,22 @@ import type { DiagnosisType } from "@/lib/types";
 type Props = {
   type: DiagnosisType;
 };
+
+const FULL_READY = !RESUME_FULL_URL.includes("REPLACE_WITH_YOUR_FORM_ID");
+
+// ここまでの選択内容をフル版フォーム（Tally等）へ引き継ぐ（＝情報回収の橋渡し）
+function buildResumeFullUrl(type: DiagnosisType, inputs: ResumeInputs) {
+  const params = new URLSearchParams({
+    type,
+    department: inputs.department,
+    position: inputs.position,
+    years: inputs.years,
+    budget: inputs.budget,
+    coordination: inputs.coordination,
+    achievements: inputs.achievements.join(","),
+  });
+  return `${RESUME_FULL_URL}?${params.toString()}`;
+}
 
 function Select({
   label,
@@ -230,13 +251,33 @@ export function CareerSheetBuilder({ type }: Props) {
             ※【　】の箇所に、実際の事業名や数値を入れて仕上げてください。これはドラフト（下書き）です。
           </p>
 
-          {/* Layer 2（有料フル版）への布石：現時点はティーザー、決済導線は後日差し込み */}
-          <div className="rounded-xl border border-dashed border-brand-300 bg-brand-50 p-4">
+          {/* Layer 2: 有料フル版への導線（詳細な経歴を入力→完成版／選択内容を引き継ぎ情報回収も兼ねる） */}
+          <div className="rounded-xl border-2 border-brand-500 bg-white p-4 shadow-sm sm:p-5">
             <p className="text-sm font-bold text-slate-900">
-              近日公開：そのまま提出できる「フル版」
+              そのまま提出できる完成版（フル版）
             </p>
-            <p className="mt-1 text-xs leading-relaxed text-slate-600">
-              あなたの経歴に完全対応した、清書済み・PDF形式の職務経歴書を作成できる機能を準備中です。応募先に合わせた自己PRの調整にも対応予定です。
+            <ul className="mt-2 space-y-1 text-xs leading-relaxed text-slate-600">
+              <li>・あなたの詳しい経歴に完全対応した、清書済みの職務経歴書一式</li>
+              <li>・応募先の職種に合わせた自己PR・志望動機の調整</li>
+              <li>・PDFでダウンロードして、そのまま応募に使えます</li>
+            </ul>
+            {FULL_READY ? (
+              <a
+                href={buildResumeFullUrl(type, inputs)}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackResumeFullClick(type)}
+                className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-brand-600 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-brand-700"
+              >
+                完成版の職務経歴書を作成する
+              </a>
+            ) : (
+              <div className="mt-4 rounded-xl border border-dashed border-slate-300 bg-slate-50 p-3 text-center text-xs text-slate-500">
+                準備中です。近日公開予定です。
+              </div>
+            )}
+            <p className="mt-2 text-[11px] leading-relaxed text-slate-400">
+              ここまでの選択内容を引き継いで作成できます。
             </p>
           </div>
         </div>
