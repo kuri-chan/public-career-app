@@ -19,6 +19,7 @@ import {
   yearsOptions,
   type ResumeDraft,
   type ResumeInputs,
+  type ResumeOption,
 } from "@/lib/resume";
 import type { DiagnosisType } from "@/lib/types";
 
@@ -28,16 +29,23 @@ type Props = {
 
 const FULL_READY = !RESUME_FULL_URL.includes("REPLACE_WITH_YOUR_FORM_ID");
 
-// ここまでの選択内容をフル版フォーム（Tally等）へ引き継ぐ（＝情報回収の橋渡し）
+function labelOf(opts: ResumeOption[], id: string) {
+  return opts.find((o) => o.id === id)?.label ?? "";
+}
+
+// ここまでの選択内容を、読みやすいラベルでフル版フォーム（Tally等）へ引き継ぐ
+// （＝情報回収の橋渡し。Tally側で department/position/years/achievements の
+//   Pre-fill パラメータを設定すると自動で埋まる）
 function buildResumeFullUrl(type: DiagnosisType, inputs: ResumeInputs) {
   const params = new URLSearchParams({
     type,
-    department: inputs.department,
-    position: inputs.position,
-    years: inputs.years,
-    budget: inputs.budget,
-    coordination: inputs.coordination,
-    achievements: inputs.achievements.join(","),
+    department: labelOf(departments, inputs.department),
+    position: labelOf(positions, inputs.position),
+    years: labelOf(yearsOptions, inputs.years),
+    achievements: inputs.achievements
+      .map((a) => labelOf(achievementOptions, a))
+      .filter(Boolean)
+      .join("、"),
   });
   return `${RESUME_FULL_URL}?${params.toString()}`;
 }
@@ -139,7 +147,10 @@ export function CareerSheetBuilder({ type }: Props) {
   }
 
   return (
-    <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-card sm:p-8">
+    <section
+      id="resume-builder"
+      className="scroll-mt-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-card sm:p-8"
+    >
       <span className="inline-block rounded-full bg-brand-100 px-3 py-1 text-xs font-bold text-brand-800">
         STEP 1 をここで実行
       </span>
