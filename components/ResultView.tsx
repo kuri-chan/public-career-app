@@ -316,6 +316,9 @@ export function ResultView({ result }: ResultViewProps) {
           <p className="mt-1 text-xs leading-relaxed text-slate-500">
             気になるものから見てみてください。どれも無料で始められます。
           </p>
+          <p className="mt-1 text-[11px] leading-relaxed text-slate-400">
+            ＜PR＞このセクションにはアフィリエイト広告（各社サービスへの遷移）を含みます。
+          </p>
         </div>
         {result.ctas.map((cta, index) => (
           <CtaCard

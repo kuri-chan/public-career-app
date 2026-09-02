@@ -97,16 +97,16 @@ export const typeResults: Record<DiagnosisType, TypeResult> = {
         description:
           "アドバイザーが行政経験を民間職種に翻訳し、どんな求人に応募できるかを一緒に整理してくれます。",
         buttonLabel: "無料でプロに転職相談する",
-        service: "agentNavi",
+        service: "groovementAgent",
       },
       {
-        kind: "reskill",
-        audience: "応募前にIT基礎の不安をなくしたい",
-        title: "未経験からIT・Web業界を目指す学習を見る",
+        kind: "transfer",
+        audience: "キャリアの方向性から相談したい",
+        title: "キャリアのプロと方向性を整理する",
         description:
-          "動画で基礎から学べる講座で、面接で話せる小さな成果物をつくっておくと安心です。",
-        buttonLabel: "無料体験・講座内容を見る",
-        service: "skillHacks",
+          "コーチング型の面談で、強みの言語化から次のキャリアの選択肢までを一緒に整理できます。転職ありきではなく、方向性から考えたい人に。",
+        buttonLabel: "無料カウンセリングを予約する",
+        service: "michinori",
       },
       undecidedCta,
     ],
@@ -193,11 +193,11 @@ export const typeResults: Record<DiagnosisType, TypeResult> = {
       {
         kind: "reskill",
         audience: "手を動かしてスキルの土台をつくりたい",
-        title: "AI・ノーコード活用を体系的に学ぶ",
+        title: "Web・ITを体系的に学べるスクールを見る",
         description:
-          "動画で基礎から学び、面接で見せられる小さな成果物をつくっておくと、業務理解との掛け算で強みになります。",
-        buttonLabel: "無料体験・講座内容を見る",
-        service: "skillHacks",
+          "基礎から学び、面接で見せられる小さな成果物をつくっておくと、業務理解との掛け算で強みになります。無料カウンセリングで学習プランを相談できます。",
+        buttonLabel: "無料カウンセリング・講座内容を見る",
+        service: "internetAcademy",
       },
       {
         kind: "transfer",
@@ -206,7 +206,16 @@ export const typeResults: Record<DiagnosisType, TypeResult> = {
         description:
           "IT・Web業界に強いアドバイザーが、現場理解を活かせる求人を一緒に探してくれます。",
         buttonLabel: "無料でプロに転職相談する",
-        service: "agentNavi",
+        service: "groovementAgent",
+      },
+      {
+        kind: "transfer",
+        audience: "強みの言語化から相談したい",
+        title: "キャリアコーチングで自己分析を深める",
+        description:
+          "コーチングを通じて、これまでの経験の棚卸しと今後の方向性を整理できます。学習と転職のどちらに進むか迷っている段階でも活用できます。",
+        buttonLabel: "無料体験セッションを予約する",
+        service: "zapass",
       },
       undecidedCta,
     ],
@@ -293,20 +302,29 @@ export const typeResults: Record<DiagnosisType, TypeResult> = {
       {
         kind: "reskill",
         audience: "まず基礎から着実に学びたい",
-        title: "未経験からITを学ぶ講座を見る",
+        title: "未経験からWeb・ITを学べるスクールを見る",
         description:
-          "動画で基礎から学べる講座なら、現職を続けながら自分のペースで土台を固められます。",
-        buttonLabel: "無料体験・講座内容を見る",
-        service: "skillHacks",
+          "基礎から学べるスクールなら、現職を続けながら自分のペースで土台を固められます。無料カウンセリングで学習プランを相談できます。",
+        buttonLabel: "無料カウンセリング・講座内容を見る",
+        service: "internetAcademy",
       },
       {
         kind: "transfer",
         audience: "入口職の求人や進め方を相談したい",
-        title: "未経験可のIT求人を相談してみる",
+        title: "未経験・第二新卒向けの求人を相談してみる",
         description:
-          "アドバイザーに、未経験から入りやすい求人や準備の進め方を相談できます。",
+          "20代・第二新卒の未経験転職に強いアドバイザーに、入りやすい求人や準備の進め方を相談できます。",
         buttonLabel: "無料でプロに転職相談する",
-        service: "agentNavi",
+        service: "neoDaini",
+      },
+      {
+        kind: "transfer",
+        audience: "何から始めるか一緒に考えたい",
+        title: "キャリアの相談から始めてみる",
+        description:
+          "自分の適性や、これから何を準備すればよいかを相談しながら整理できます。まだ方向が定まっていない段階の一歩目に。",
+        buttonLabel: "キャリアの相談をしてみる",
+        service: "careerPat",
       },
       undecidedCta,
     ],

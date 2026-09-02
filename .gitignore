@@ -4,3 +4,6 @@ out
 .DS_Store
 *.log
 .env*.local
+
+# 有料商品の生成ロジック（非公開）
+.claude/skills/resume-full/
