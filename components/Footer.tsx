@@ -8,6 +8,9 @@ export function Footer() {
           <Link href="/" className="hover:text-brand-700 hover:underline">
             ホーム
           </Link>
+          <Link href="/articles" className="hover:text-brand-700 hover:underline">
+            コラム
+          </Link>
           <Link href="/operator" className="hover:text-brand-700 hover:underline">
             運営者情報
           </Link>
