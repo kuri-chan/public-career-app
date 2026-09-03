@@ -1,15 +1,31 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { affiliateServices } from "@/lib/links";
-import { trackCtaClick } from "@/lib/analytics";
-import type { Cta, TypeResult } from "@/lib/types";
+import { trackCtaClick, trackIntentSelect } from "@/lib/analytics";
+import type { Cta, CtaKind, TypeResult } from "@/lib/types";
 import { CareerSheetBuilder } from "./CareerSheetBuilder";
+import { OptinCard } from "./OptinCard";
 import { ShareOnXButton } from "./ShareOnXButton";
 
 type ResultViewProps = {
   result: TypeResult;
 };
+
+const intentOptions: { kind: CtaKind; label: string; hint: string }[] = [
+  { kind: "transfer", label: "今すぐ転職したい", hint: "求人・エージェント相談を優先表示" },
+  { kind: "reskill", label: "まずスキルを伸ばしたい", hint: "学習・講座の情報を優先表示" },
+  { kind: "content", label: "まだ迷っている", hint: "現職継続も含めて整理する情報を優先表示" },
+];
+
+// 選んだ状況(kind)に一致するCTAを先頭に寄せる。安定ソートで元の順序はkind内で維持する。
+function sortCtasByIntent(ctas: Cta[], intent: CtaKind | null): Cta[] {
+  if (!intent) return ctas;
+  const matched = ctas.filter((c) => c.kind === intent);
+  const rest = ctas.filter((c) => c.kind !== intent);
+  return [...matched, ...rest];
+}
 
 function StarRating({ rating }: { rating: number }) {
   const filled = Math.max(0, Math.min(5, rating));
@@ -144,6 +160,17 @@ function CtaCard({
 }
 
 export function ResultView({ result }: ResultViewProps) {
+  const [intent, setIntent] = useState<CtaKind | null>(null);
+  const sortedCtas = useMemo(
+    () => sortCtasByIntent(result?.ctas ?? [], intent),
+    [result, intent],
+  );
+
+  function handleIntentSelect(kind: CtaKind) {
+    setIntent((prev) => (prev === kind ? null : kind));
+    trackIntentSelect(result.id, kind);
+  }
+
   if (!result) {
     return (
       <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-card">
@@ -314,21 +341,51 @@ export function ResultView({ result }: ResultViewProps) {
             あなたの状況に合わせて動いてみる
           </h2>
           <p className="mt-1 text-xs leading-relaxed text-slate-500">
-            気になるものから見てみてください。どれも無料で始められます。
+            今の状況に近いものを選ぶと、表示の順番が変わります。選ばなくても、気になるものから見てもらって大丈夫です。
           </p>
           <p className="mt-1 text-[11px] leading-relaxed text-slate-400">
             ＜PR＞このセクションにはアフィリエイト広告（各社サービスへの遷移）を含みます。
           </p>
         </div>
-        {result.ctas.map((cta, index) => (
+
+        <div
+          className="flex flex-wrap gap-2"
+          role="group"
+          aria-label="今の状況を選ぶ"
+        >
+          {intentOptions.map((option) => {
+            const active = intent === option.kind;
+            return (
+              <button
+                key={option.kind}
+                type="button"
+                aria-pressed={active}
+                onClick={() => handleIntentSelect(option.kind)}
+                title={option.hint}
+                className={`rounded-full border px-4 py-2 text-xs font-semibold transition ${
+                  active
+                    ? "border-brand-600 bg-brand-600 text-white"
+                    : "border-slate-200 bg-white text-slate-600 hover:border-brand-400"
+                }`}
+              >
+                {option.label}
+              </button>
+            );
+          })}
+        </div>
+
+        {sortedCtas.map((cta, index) => (
           <CtaCard
-            key={index}
+            key={`${intent ?? "default"}-${index}`}
             cta={cta}
             result={result}
             primary={index === 0}
           />
         ))}
       </section>
+
+      {/* 結果保存（メール登録） */}
+      <OptinCard type={result.id} />
 
       {/* SNSシェア */}
       <ShareOnXButton type={result.id} typeName={result.name} />

@@ -95,3 +95,18 @@ export function trackResumeCopy(resultType: DiagnosisType, block: string) {
 export function trackResumeFullClick(resultType: DiagnosisType) {
   sendEvent("resume_full_click", { result_type: resultType });
 }
+
+// 状況フィルター選択（結果ページで「今の状況」を自己申告した意図シグナル）
+export function trackIntentSelect(resultType: DiagnosisType, intent: string) {
+  sendEvent("intent_select", { result_type: resultType, intent });
+}
+
+// 結果保存メール登録カードの表示（1回のみ計測）
+export function trackOptinView(resultType: DiagnosisType) {
+  sendEvent("optin_card_view", { result_type: resultType });
+}
+
+// 結果保存メールの登録送信（一次情報回収の成立シグナル）
+export function trackOptinSubmit(resultType: DiagnosisType, emailSent: boolean) {
+  sendEvent("optin_submit", { result_type: resultType, email_sent: emailSent });
+}

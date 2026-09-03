@@ -3,8 +3,12 @@ export const SITE_URL = "https://public-career-app.vercel.app";
 // お問い合わせ用 Google フォームのURL
 export const CONTACT_FORM_URL = "https://forms.gle/dS6GUMN55fWb6AyQ6";
 
-// 職務経歴書フル版（Layer2）の申込フォーム（Tally＋Stripe決済 ¥1,480）
+// 職務経歴書フル版（Layer2）の申込フォーム（Tally＋Stripe決済）
+// プランA：職務経歴書のみ ¥1,480（編集可能なWord/.docxで納品）
 export const RESUME_FULL_URL = "https://tally.so/r/zx55Zg";
+// プランB：履歴書＋職務経歴書セット ¥2,480（編集可能なWord/.docxで納品）
+// 履歴書は単体販売しない＝セットでしか手に入らない構成。詳細は resume-full スキル参照。
+export const RESUME_FULL_SET_URL = "https://tally.so/r/LZ2qqp";
 
 // 実アフィリエイトサービス（提携中のみ掲載）
 // url: 遷移先 / imgSrc: インプレッション計測用ピクセル（表示時に発火）

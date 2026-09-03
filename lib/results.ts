@@ -108,6 +108,15 @@ export const typeResults: Record<DiagnosisType, TypeResult> = {
         buttonLabel: "無料カウンセリングを予約する",
         service: "michinori",
       },
+      {
+        kind: "content",
+        audience: "まだ転職するか迷っている",
+        title: "迷っている段階から、コーチングで整理する",
+        description:
+          "強みの言語化や経験の棚卸しから、コーチング形式で進められます。転職するかまだ決めていなくても、話を聞いてみるだけで整理が進むことがあります。",
+        buttonLabel: "無料体験セッションを予約する",
+        service: "zapass",
+      },
       undecidedCta,
     ],
   },
@@ -217,6 +226,15 @@ export const typeResults: Record<DiagnosisType, TypeResult> = {
         buttonLabel: "無料体験セッションを予約する",
         service: "zapass",
       },
+      {
+        kind: "content",
+        audience: "何から始めるか一緒に考えたい",
+        title: "方向性が定まっていなくても相談できる",
+        description:
+          "転職か学習か、まだ決めていない段階でも、自分の適性や次にやることを一緒に整理できます。まだ方向が定まっていない人の一歩目に。",
+        buttonLabel: "キャリアの相談をしてみる",
+        service: "careerPat",
+      },
       undecidedCta,
     ],
   },
@@ -325,6 +343,15 @@ export const typeResults: Record<DiagnosisType, TypeResult> = {
           "自分の適性や、これから何を準備すればよいかを相談しながら整理できます。まだ方向が定まっていない段階の一歩目に。",
         buttonLabel: "キャリアの相談をしてみる",
         service: "careerPat",
+      },
+      {
+        kind: "content",
+        audience: "まだ迷っている段階で相談したい",
+        title: "コーチング型の面談で方向性を整理する",
+        description:
+          "強みの言語化から、今後のキャリアの選択肢までを一緒に整理できます。転職ありきではなく、方向性から考えたい人に。",
+        buttonLabel: "無料カウンセリングを予約する",
+        service: "michinori",
       },
       undecidedCta,
     ],
