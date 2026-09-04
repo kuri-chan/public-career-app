@@ -53,6 +53,12 @@ export const affiliateServices = {
     imgSrc:
       "https://i.moshimo.com/af/i/impression?a_id=5782993&p_id=7422&pc_id=21397&pl_id=93522",
   },
+  uzuzIt: {
+    id: "uzuzIt",
+    name: "ウズウズIT（IT/Webエンジニア就職・転職）",
+    url: "https://px.a8.net/svt/ejp?a8mat=4BAITP+SKUL6+33T0+1BMW42",
+    imgSrc: "https://www12.a8.net/0.gif?a8mat=4BAITP+SKUL6+33T0+1BMW42",
+  },
   // --- スクール（学習） ---
   internetAcademy: {
     id: "internetAcademy",

@@ -337,6 +337,15 @@ export const typeResults: Record<DiagnosisType, TypeResult> = {
       },
       {
         kind: "transfer",
+        audience: "スクールより先に、エンジニア就職の求人を見たい",
+        title: "ITエンジニア就職に特化したサービスを見る",
+        description:
+          "未経験からのITエンジニア就職に強く、研修と求人紹介を一貫してサポートしてもらえます。学習と就職を同時に進めたい人に向いています。",
+        buttonLabel: "無料相談してみる",
+        service: "uzuzIt",
+      },
+      {
+        kind: "transfer",
         audience: "何から始めるか一緒に考えたい",
         title: "キャリアの相談から始めてみる",
         description:
