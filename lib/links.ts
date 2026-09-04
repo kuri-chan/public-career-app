@@ -1,4 +1,4 @@
-export const SITE_URL = "https://public-career-app.vercel.app";
+export const SITE_URL = "https://koumuin-shift.com";
 
 // お問い合わせ用 Google フォームのURL
 export const CONTACT_FORM_URL = "https://forms.gle/dS6GUMN55fWb6AyQ6";

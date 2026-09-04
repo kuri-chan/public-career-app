@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 const siteName = "公務員キャリアシフト診断";
 const description = "あなたの公務員としての経験や強みを活かせる民間IT・Web系のキャリア適性を診断します。";
-const siteUrl = "https://public-career-app.vercel.app";
+const siteUrl = "https://koumuin-shift.com";
 // ★ 画像URLの拡張子を .png から .jpeg に修正
 const ogpImageUrl = `${siteUrl}/ogp.jpeg`; 
 

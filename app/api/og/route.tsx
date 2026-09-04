@@ -44,7 +44,7 @@ export async function GET(req: Request) {
 
   const label = "公務員キャリアシフト診断";
   const heading = "あなたの経験を、民間のことばに翻訳すると";
-  const footer = "public-career-app.vercel.app";
+  const footer = "koumuin-shift.com";
 
   const glyphs =
     label +

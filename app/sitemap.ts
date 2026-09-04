@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { articles } from '@/lib/articles'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://public-career-app.vercel.app'
+  const baseUrl = 'https://koumuin-shift.com'
 
   const articleEntries: MetadataRoute.Sitemap = articles.map((article) => ({
     url: `${baseUrl}/articles/${article.slug}`,
