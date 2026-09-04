@@ -10,6 +10,10 @@ export const RESUME_FULL_URL = "https://tally.so/r/zx55Zg";
 // 履歴書は単体販売しない＝セットでしか手に入らない構成。詳細は resume-full スキル参照。
 export const RESUME_FULL_SET_URL = "https://tally.so/r/LZ2qqp";
 
+// 結果保存メール登録の特典：履歴書・職務経歴書の無料雛形（公開の静的ファイル、個人情報は含まない）
+export const RIREKISHO_TEMPLATE_URL = `${SITE_URL}/templates/rirekisho-hinagata.docx`;
+export const SHOKUMU_KEIREKISHO_TEMPLATE_URL = `${SITE_URL}/templates/shokumu-keirekisho-hinagata.docx`;
+
 // 実アフィリエイトサービス（提携中のみ掲載）
 // url: 遷移先 / imgSrc: インプレッション計測用ピクセル（表示時に発火）
 // A8.net / もしもアフィリエイト / バリューコマース の3ASPを収容。

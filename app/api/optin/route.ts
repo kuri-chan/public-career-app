@@ -1,7 +1,12 @@
 import { buildOptinEmail } from "@/lib/optin-email";
 import { isDiagnosisType } from "@/lib/diagnosis";
 import { typeResults } from "@/lib/results";
-import { CONTACT_FORM_URL, SITE_URL } from "@/lib/links";
+import {
+  CONTACT_FORM_URL,
+  RIREKISHO_TEMPLATE_URL,
+  SHOKUMU_KEIREKISHO_TEMPLATE_URL,
+  SITE_URL,
+} from "@/lib/links";
 
 /**
  * 結果保存メールの登録エンドポイント。
@@ -126,6 +131,8 @@ export async function POST(req: Request): Promise<Response> {
       tagline: result.tagline,
       resultUrl: `${SITE_URL}/result?type=${type}`,
       articlesUrl: `${SITE_URL}/articles`,
+      rirekishoTemplateUrl: RIREKISHO_TEMPLATE_URL,
+      shokumuKeirekishoTemplateUrl: SHOKUMU_KEIREKISHO_TEMPLATE_URL,
       unsubscribeUrl: UNSUBSCRIBE,
     });
     const res = await fetch(`${BREVO_BASE}/smtp/email`, {

@@ -3,6 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { trackOptinSubmit, trackOptinView } from "@/lib/analytics";
+import {
+  RIREKISHO_TEMPLATE_URL,
+  SHOKUMU_KEIREKISHO_TEMPLATE_URL,
+} from "@/lib/links";
 import type { DiagnosisType } from "@/lib/types";
 
 // 結果保存（メール登録）カード。金融事業プロジェクト（手取りラボ）の
@@ -93,15 +97,19 @@ export function OptinCard({ type }: Props) {
   }
 
   return (
-    <div ref={ref} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-card sm:p-6">
+    <div
+      ref={ref}
+      id="save-result"
+      className="scroll-mt-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-card sm:p-6"
+    >
       <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-400">
         任意 ・ あとで見返したい方へ
       </span>
       <p className="mt-1 text-sm font-bold text-slate-900">
-        結果をメールで保存する
+        結果と、履歴書・職務経歴書の雛形を受け取る
       </p>
       <p className="mt-1 text-sm leading-relaxed text-slate-500">
-        今の結果をあとから見返せるよう、リンクをメールでお送りします。売り込みはしません。
+        今の結果へのリンクと、すぐに使える履歴書・職務経歴書の雛形（Wordファイル・無料）をメールでお送りします。売り込みはしません。
       </p>
 
       {status === "done" ? (
@@ -112,6 +120,20 @@ export function OptinCard({ type }: Props) {
               ? "結果を見返せるメールをお送りしました。数分たっても届かない場合は、迷惑メールフォルダをご確認ください。"
               : "結果を見返せるメールをお送りします。届かない場合は、迷惑メールフォルダをご確認ください。"}
           </p>
+          <div className="mt-3 flex flex-col gap-2 sm:flex-row">
+            <a
+              href={RIREKISHO_TEMPLATE_URL}
+              className="inline-flex flex-1 items-center justify-center rounded-lg border border-brand-300 bg-white px-3 py-2 text-xs font-semibold text-brand-700 hover:bg-brand-50"
+            >
+              履歴書の雛形をダウンロード
+            </a>
+            <a
+              href={SHOKUMU_KEIREKISHO_TEMPLATE_URL}
+              className="inline-flex flex-1 items-center justify-center rounded-lg border border-brand-300 bg-white px-3 py-2 text-xs font-semibold text-brand-700 hover:bg-brand-50"
+            >
+              職務経歴書の雛形をダウンロード
+            </a>
+          </div>
         </div>
       ) : (
         <form onSubmit={onSubmit} className="mt-4">
@@ -135,7 +157,7 @@ export function OptinCard({ type }: Props) {
               disabled={status === "submitting"}
               className="shrink-0 rounded-lg border border-brand-300 bg-white px-5 py-2.5 text-sm font-semibold text-brand-700 transition hover:bg-brand-50 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {status === "submitting" ? "送信中…" : "結果を保存する"}
+              {status === "submitting" ? "送信中…" : "結果と雛形を受け取る"}
             </button>
           </div>
 

@@ -13,6 +13,10 @@ export interface OptinEmailInput {
   resultUrl: string;
   /** コラム一覧への絶対URL */
   articlesUrl: string;
+  /** 履歴書の雛形（.docx）への絶対URL */
+  rirekishoTemplateUrl: string;
+  /** 職務経歴書の雛形（.docx）への絶対URL */
+  shokumuKeirekishoTemplateUrl: string;
   /** 配信解除リンク（フッター必須） */
   unsubscribeUrl: string;
 }
@@ -41,6 +45,10 @@ export function buildOptinEmail(i: OptinEmailInput): OptinEmail {
     "結果はいつでもこちらから見返せます。",
     i.resultUrl,
     "",
+    "▼ すぐに使える無料の雛形もご用意しました",
+    `履歴書の雛形（Word）：${i.rirekishoTemplateUrl}`,
+    `職務経歴書の雛形（Word）：${i.shokumuKeirekishoTemplateUrl}`,
+    "",
     "転職・リスキリング・現職継続、どれを選ぶ場合でも急ぐ必要はありません。情報が揃ってから決めて大丈夫です。",
     "",
     "▼ 経験の翻訳や職務経歴書の書き方のヒント",
@@ -66,6 +74,16 @@ export function buildOptinEmail(i: OptinEmailInput): OptinEmail {
          style="display:inline-block;background:#1e40af;color:#ffffff;text-decoration:none;font-weight:700;padding:12px 20px;border-radius:10px;">
         結果を見返す
       </a>
+    </p>
+
+    <div style="border-top:1px solid #e2e8f0;margin:22px 0;"></div>
+
+    <p style="margin:0 0 6px;font-weight:700;">すぐに使える無料の雛形もご用意しました</p>
+    <p style="margin:0 0 8px;">
+      <a href="${esc(i.rirekishoTemplateUrl)}" style="color:#1e40af;">履歴書の雛形（Word）</a>
+    </p>
+    <p style="margin:0 0 20px;">
+      <a href="${esc(i.shokumuKeirekishoTemplateUrl)}" style="color:#1e40af;">職務経歴書の雛形（Word）</a>
     </p>
 
     <div style="border-top:1px solid #e2e8f0;margin:22px 0;"></div>
