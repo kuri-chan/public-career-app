@@ -43,6 +43,7 @@ export function trackCtaClick(params: {
   ctaKind: string;
   service?: string;
   label?: string;
+  intent?: string; // クリック時点で選択されていた状況フィルター（意図）。状況別CTAクリック率の集計用。
 }) {
   // アフィリエイト（service あり）は従来通り click_affiliate として計測
   if (params.service) {
@@ -51,6 +52,7 @@ export function trackCtaClick(params: {
       event_label: params.service,
       result_type: params.resultType,
       cta_type: params.ctaKind,
+      intent: params.intent,
     });
     return;
   }
@@ -59,6 +61,7 @@ export function trackCtaClick(params: {
     result_type: params.resultType,
     cta_type: params.ctaKind,
     event_label: params.label,
+    intent: params.intent,
   });
 }
 

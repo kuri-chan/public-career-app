@@ -148,12 +148,13 @@ export function CareerSheetBuilder({ type }: Props) {
   }
 
   return (
+    <>
     <section
       id="resume-builder"
       className="scroll-mt-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-card sm:p-8"
     >
       <span className="inline-block rounded-full bg-brand-100 px-3 py-1 text-xs font-bold text-brand-800">
-        STEP 1 をここで実行
+        無料 · STEP 1 をここで実行
       </span>
       <h2 className="mt-3 text-lg font-bold text-slate-900 sm:text-xl">
         あなたの経験を、職務経歴書のことばに変換する
@@ -230,7 +231,7 @@ export function CareerSheetBuilder({ type }: Props) {
         className="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-brand-600 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-brand-700 disabled:cursor-not-allowed disabled:bg-slate-300"
       >
         {complete
-          ? "職務経歴書のドラフトを作成する"
+          ? "職務経歴書を無料で作ってみる"
           : "上の項目を選ぶと作成できます"}
       </button>
 
@@ -262,82 +263,89 @@ export function CareerSheetBuilder({ type }: Props) {
           <p className="text-[11px] leading-relaxed text-slate-400">
             ※【　】の箇所に、実際の事業名や数値を入れて仕上げてください。これはドラフト（下書き）です。
           </p>
-
-          {/* Layer 2: 有料フル版への導線（詳細な経歴を入力→完成版／選択内容を引き継ぎ情報回収も兼ねる） */}
-          <div>
-            <p className="text-sm font-bold text-slate-900">
-              そのまま提出できる完成版を作る
-            </p>
-            <p className="mt-1 text-xs leading-relaxed text-slate-500">
-              どちらも、編集可能なWordファイル（.docx）でお届けします。
-            </p>
-
-            <div className="mt-3 grid gap-3 sm:grid-cols-2">
-              {/* プランA：職務経歴書のみ */}
-              <div className="flex flex-col rounded-xl border-2 border-slate-200 bg-white p-4 shadow-sm sm:p-5">
-                <p className="text-xs font-semibold text-slate-500">職務経歴書のみ</p>
-                <p className="mt-1 text-2xl font-bold text-slate-900">¥1,480</p>
-                <ul className="mt-3 flex-1 space-y-1 text-xs leading-relaxed text-slate-600">
-                  <li>・詳しい経歴に完全対応した、清書済みの職務経歴書一式</li>
-                  <li>・応募先の職種に合わせた自己PR・志望動機の調整</li>
-                  <li>・編集可能なWord（.docx）で納品</li>
-                </ul>
-                {FULL_READY ? (
-                  <a
-                    href={buildResumeFullUrl(RESUME_FULL_URL, type, inputs)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => trackResumeFullClick(type)}
-                    className="mt-4 inline-flex w-full items-center justify-center rounded-xl border border-brand-600 bg-white px-4 py-3 text-sm font-bold text-brand-700 transition-colors hover:bg-brand-50"
-                  >
-                    職務経歴書を作成する
-                  </a>
-                ) : (
-                  <div className="mt-4 rounded-xl border border-dashed border-slate-300 bg-slate-50 p-3 text-center text-xs text-slate-500">
-                    準備中です。近日公開予定です。
-                  </div>
-                )}
-              </div>
-
-              {/* プランB：履歴書＋職務経歴書セット */}
-              <div className="relative flex flex-col rounded-xl border-2 border-brand-500 bg-white p-4 shadow-md sm:p-5">
-                <span className="absolute -top-3 left-4 rounded-full bg-brand-600 px-2.5 py-0.5 text-[10px] font-bold text-white">
-                  応募には両方必要です
-                </span>
-                <p className="text-xs font-semibold text-brand-700">履歴書＋職務経歴書セット</p>
-                <p className="mt-1 text-2xl font-bold text-slate-900">¥2,480</p>
-                <ul className="mt-3 flex-1 space-y-1 text-xs leading-relaxed text-slate-600">
-                  <li>・職務経歴書一式（プランAと同内容）</li>
-                  <li>・履歴書の大枠（学歴・職歴・志望動機・自己PR欄）も作成</li>
-                  <li>・編集可能なWord（.docx）で納品。氏名・生年月日・住所欄はご自身でご記入いただきます</li>
-                </ul>
-                <p className="mt-2 text-[11px] leading-relaxed text-brand-700">
-                  履歴書は単体では提供しておらず、職務経歴書とまとめて作成することでこの価格を実現しています。
-                </p>
-                {SET_READY ? (
-                  <a
-                    href={buildResumeFullUrl(RESUME_FULL_SET_URL, type, inputs)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => trackResumeFullClick(type)}
-                    className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-brand-600 px-6 py-3.5 text-sm font-bold text-white shadow-md transition-colors hover:bg-brand-700"
-                  >
-                    セットで作成する
-                  </a>
-                ) : (
-                  <div className="mt-4 rounded-xl border border-dashed border-slate-300 bg-slate-50 p-3 text-center text-xs text-slate-500">
-                    準備中です。近日公開予定です。
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <p className="mt-2 text-[11px] leading-relaxed text-slate-400">
-              ここまでの選択内容を引き継いで作成できます。
-            </p>
-          </div>
         </div>
       ) : null}
     </section>
+
+    {/* 完成版購入導線：無料ドラフトの生成有無に関係なく常に表示する独立セクション */}
+    <section
+      id="full-version"
+      className="scroll-mt-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-card sm:p-8"
+    >
+      <h2 className="text-lg font-bold text-slate-900 sm:text-xl">
+        あなたの履歴書・職務経歴書を作成する
+      </h2>
+      <p className="mt-1 text-sm leading-relaxed text-slate-600">
+        履歴書・職務経歴書は、転職活動の必需品です。今回の診断結果（経験の民間向け翻訳・相性の良い職種・具体的なキャリアアクション・不足スキルと補い方）をもとに、あなた専用に仕上げます。
+      </p>
+      <p className="mt-1 text-xs leading-relaxed text-slate-500">
+        どちらも、編集可能なWordファイル（.docx）でお届けします。
+      </p>
+
+      <div className="mt-4 grid gap-3 sm:grid-cols-2">
+        {/* プランA：職務経歴書のみ */}
+        <div className="flex flex-col rounded-xl border-2 border-slate-200 bg-white p-4 shadow-sm sm:p-5">
+          <p className="text-xs font-semibold text-slate-500">職務経歴書のみ</p>
+          <p className="mt-1 text-2xl font-bold text-slate-900">¥1,480</p>
+          <ul className="mt-3 flex-1 space-y-1 text-xs leading-relaxed text-slate-600">
+            <li>・詳しい経歴に完全対応した、清書済みの職務経歴書一式</li>
+            <li>・応募先の職種に合わせた自己PR・志望動機の調整</li>
+            <li>・編集可能なWord（.docx）で納品</li>
+          </ul>
+          {FULL_READY ? (
+            <a
+              href={buildResumeFullUrl(RESUME_FULL_URL, type, inputs)}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackResumeFullClick(type)}
+              className="mt-4 inline-flex w-full items-center justify-center rounded-xl border border-brand-600 bg-white px-4 py-3 text-sm font-bold text-brand-700 transition-colors hover:bg-brand-50"
+            >
+              職務経歴書を作成する
+            </a>
+          ) : (
+            <div className="mt-4 rounded-xl border border-dashed border-slate-300 bg-slate-50 p-3 text-center text-xs text-slate-500">
+              準備中です。近日公開予定です。
+            </div>
+          )}
+        </div>
+
+        {/* プランB：履歴書＋職務経歴書セット */}
+        <div className="relative flex flex-col rounded-xl border-2 border-brand-500 bg-white p-4 shadow-md sm:p-5">
+          <span className="absolute -top-3 left-4 rounded-full bg-brand-600 px-2.5 py-0.5 text-[10px] font-bold text-white">
+            応募には両方必要です
+          </span>
+          <p className="text-xs font-semibold text-brand-700">履歴書＋職務経歴書セット</p>
+          <p className="mt-1 text-2xl font-bold text-slate-900">¥2,480</p>
+          <ul className="mt-3 flex-1 space-y-1 text-xs leading-relaxed text-slate-600">
+            <li>・職務経歴書一式（プランAと同内容）</li>
+            <li>・履歴書の大枠（学歴・職歴・志望動機・自己PR欄）も作成</li>
+            <li>・編集可能なWord（.docx）で納品。氏名・生年月日・住所欄はご自身でご記入いただきます</li>
+          </ul>
+          <p className="mt-2 text-[11px] leading-relaxed text-brand-700">
+            履歴書は単体では提供しておらず、職務経歴書とまとめて作成することでこの価格を実現しています。
+          </p>
+          {SET_READY ? (
+            <a
+              href={buildResumeFullUrl(RESUME_FULL_SET_URL, type, inputs)}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackResumeFullClick(type)}
+              className="mt-4 inline-flex w-full items-center justify-center rounded-xl bg-brand-600 px-6 py-3.5 text-sm font-bold text-white shadow-md transition-colors hover:bg-brand-700"
+            >
+              セットで作成する
+            </a>
+          ) : (
+            <div className="mt-4 rounded-xl border border-dashed border-slate-300 bg-slate-50 p-3 text-center text-xs text-slate-500">
+              準備中です。近日公開予定です。
+            </div>
+          )}
+        </div>
+      </div>
+
+      <p className="mt-2 text-[11px] leading-relaxed text-slate-400">
+        上の無料ドラフトを作成済みの場合、その選択内容を引き継いで作成できます。
+      </p>
+    </section>
+    </>
   );
 }
