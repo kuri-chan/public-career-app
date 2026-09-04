@@ -241,14 +241,14 @@ export function ResultView({ result }: ResultViewProps) {
       <section className="space-y-6 rounded-2xl border-2 border-brand-500 bg-white p-5 shadow-lg sm:p-8">
         {/* ② 今の状況に近いもの */}
         <div>
-          <h2 className="text-base font-bold text-slate-900 sm:text-lg">
+          <h2 className="text-lg font-bold text-slate-900 sm:text-xl">
             今の状況に近いものを選んでください
           </h2>
           <p className="mt-1 text-xs leading-relaxed text-slate-500">
             選ばなくても、下は診断タイプに合わせた内容が表示されます。
           </p>
           <div
-            className="mt-3 flex flex-wrap gap-2"
+            className="mt-3 grid grid-cols-3 gap-2"
             role="group"
             aria-label="今の状況を選ぶ"
           >
@@ -260,10 +260,10 @@ export function ResultView({ result }: ResultViewProps) {
                   type="button"
                   aria-pressed={active}
                   onClick={() => handleIntentSelect(option.kind)}
-                  className={`rounded-full border px-4 py-2 text-xs font-semibold transition ${
+                  className={`rounded-xl border-2 px-2 py-3.5 text-center text-sm font-bold leading-snug transition sm:text-base ${
                     active
-                      ? "border-brand-600 bg-brand-600 text-white"
-                      : "border-slate-200 bg-white text-slate-600 hover:border-brand-400"
+                      ? "border-brand-600 bg-brand-600 text-white shadow-md"
+                      : "border-slate-200 bg-white text-slate-700 hover:border-brand-400 hover:bg-brand-50"
                   }`}
                 >
                   {option.label}

@@ -36,7 +36,9 @@ function labelOf(opts: ResumeOption[], id: string) {
 
 // ここまでの選択内容を、読みやすいラベルでフル版フォーム（Tally等）へ引き継ぐ
 // （＝情報回収の橋渡し。Tally側で department/position/years/achievements の
-//   Pre-fill パラメータを設定すると自動で埋まる）
+//   Pre-fill パラメータを設定すると自動で埋まる想定だったが、Tally側でPrefillが
+//   機能していないことが判明。パラメータ自体は無害なので残しているが、現状は
+//   Tally側で同じ項目を改めて入力してもらう運用になっている）
 function buildResumeFullUrl(baseUrl: string, type: DiagnosisType, inputs: ResumeInputs) {
   const params = new URLSearchParams({
     type,
