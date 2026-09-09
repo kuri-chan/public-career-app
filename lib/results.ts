@@ -209,6 +209,15 @@ export const typeResults: Record<DiagnosisType, TypeResult> = {
         service: "internetAcademy",
       },
       {
+        kind: "reskill",
+        audience: "生成AIを本格的に学びたい",
+        title: "生成AI活用スキルを学び放題で身につける",
+        description:
+          "ChatGPTなど複数の生成AIツールを実践形式で学べます。現場での使いこなし方を体系的に押さえておくと、AI活用の実績として語れるようになります。",
+        buttonLabel: "学び放題の内容を見る",
+        service: "dmmGenAiCamp",
+      },
+      {
         kind: "transfer",
         audience: "自分の経験で応募できる求人を知りたい",
         title: "業務改善・DX領域の求人を見てみる",

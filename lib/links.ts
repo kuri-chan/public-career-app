@@ -67,6 +67,12 @@ export const affiliateServices = {
     imgSrc:
       "https://ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=3779840&pid=892691086",
   },
+  dmmGenAiCamp: {
+    id: "dmmGenAiCamp",
+    name: "DMM 生成AI CAMP（生成AI活用講座・学び放題）",
+    url: "https://px.a8.net/svt/ejp?a8mat=4BC2EJ+71MP96+5VEK+5YRHE",
+    imgSrc: "https://www15.a8.net/0.gif?a8mat=4BC2EJ+71MP96+5VEK+5YRHE",
+  },
 } as const;
 
 export type AffiliateServiceId = keyof typeof affiliateServices;
